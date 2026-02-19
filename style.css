@@ -1,0 +1,91 @@
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 40px;
+    color: #fff;
+    background: linear-gradient(135deg, rgb(10, 25, 50), rgb(20, 40, 70));
+    background-size: 400% 400%;
+    animation: gradientBG 20s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.app {
+    max-width: 1200px;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    color: rgb(100, 230, 230);
+}
+
+p {
+    text-align: center;
+    color: rgb(150, 200, 200);
+}
+
+#search {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    border: none;
+    margin: 30px 0;
+    outline: none;
+    background-color: rgba(0, 50, 100, 0.8);
+    color: rgb(150, 230, 230);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: rgba(0, 40, 80, 0.8);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,255,255,0.4);
+}
+
+.card h3 {
+    margin: 0 0 10px;
+    font-size: 1.2rem;
+    color: rgb(0, 230, 230);
+}
+
+.price {
+    display: flex;
+    justify-content: space-between;
+}
+
+.buy {
+    color: rgb(0, 200, 200);
+}
+
+.sell {
+    color: rgb(0, 150, 150);
+}
+
+.enchants {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: rgb(0, 255, 255);
+}
