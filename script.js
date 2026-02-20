@@ -1,3 +1,6 @@
+// =======================
+// Item-Liste (nur Blöcke)
+// =======================
 const items = [
     { material: "CALCITE", buy: 2, sell: 0.5 },
     { material: "DRIPSTONE_BLOCK", buy: 1, sell: 0.25 },
@@ -66,13 +69,6 @@ const items = [
     { material: "OBSIDIAN", buy: 31.25, sell: 7.82 },
     { material: "CRYING_OBSIDIAN", buy: 62.5, sell: 15.63 },
 
-    { material: "OAK_PLANKS", buy: 1.11, sell: 0.28 },
-    { material: "SPRUCE_PLANKS", buy: 1.11, sell: 0.28 },
-    { material: "BIRCH_PLANKS", buy: 1.11, sell: 0.28 },
-    { material: "JUNGLE_PLANKS", buy: 1.11, sell: 0.28 },
-    { material: "ACACIA_PLANKS", buy: 1.11, sell: 0.28 },
-    { material: "DARK_OAK_PLANKS", buy: 1.11, sell: 0.28 },
-
     { material: "BLACK_WOOL", buy: 29.4, sell: 7.35 },
     { material: "BLUE_WOOL", buy: 29.4, sell: 7.35 },
     { material: "GREEN_WOOL", buy: 29.4, sell: 7.35 },
@@ -80,9 +76,15 @@ const items = [
     { material: "WHITE_WOOL", buy: 29.4, sell: 7.35 }
 ];
 
+// =======================
+// DOM-Elemente
+// =======================
 const list = document.getElementById("item-list");
 const search = document.getElementById("search");
 
+// =======================
+// Render-Funktion
+// =======================
 function renderItems(filter = "") {
     list.innerHTML = "";
 
@@ -106,8 +108,14 @@ function renderItems(filter = "") {
         });
 }
 
+// =======================
+// Suche
+// =======================
 search.addEventListener("input", e => {
     renderItems(e.target.value);
 });
 
+// =======================
+// Initiales Rendern
+// =======================
 renderItems();
