@@ -1,21 +1,235 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>Marktpreise</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Marktpreise – CR14</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 40px;
+    color: #fff;
+    background: linear-gradient(135deg, rgb(10, 25, 50), rgb(20, 40, 70));
+    background-size: 400% 400%;
+    animation: gradientBG 20s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.layout {
+    display: flex;
+    gap: 30px;
+    max-width: 1500px;
+    margin: auto;
+}
+
+.sidebar {
+    width: 240px;
+    background: rgba(0, 30, 60, 0.85);
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    text-align: center;
+    color: rgb(0, 230, 230);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    background: rgba(0, 60, 100, 0.8);
+    color: rgb(150, 230, 230);
+}
+
+.sidebar li.active,
+.sidebar li:hover {
+    background: rgba(0, 200, 200, 0.6);
+    color: #000;
+}
+
+.app { flex: 1; }
+
+h1 {
+    text-align: center;
+    color: rgb(100, 230, 230);
+}
+
+#search {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    border: none;
+    margin: 30px 0;
+    background: rgba(0, 50, 100, 0.8);
+    color: rgb(150, 230, 230);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: rgba(0, 40, 80, 0.8);
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.card h3 {
+    margin: 0 0 10px;
+    color: rgb(0, 230, 230);
+}
+
+.price {
+    display: flex;
+    justify-content: space-between;
+}
+</style>
 </head>
+
 <body>
 
-<div class="app">
-    <h1>💰 Marktpreise vom Cr14 Server</h1>
-    <p>Sieh dir Ankauf- & Verkaufspreise aller Items an für CR14 SERVER</p>
+<div class="layout">
 
+<aside class="sidebar">
+    <h2>📦 Kategorien</h2>
+    <ul id="categories"></ul>
+</aside>
+
+<main class="app">
+    <h1>💰 Marktpreise – CR14</h1>
     <input type="text" id="search" placeholder="🔍 Item suchen...">
-
     <div id="item-list" class="grid"></div>
+</main>
+
 </div>
 
-<script src="script.js"></script>
+<script>
+// =======================
+// Items (OHNE Kategorien)
+// =======================
+const items = [
+    { material: "CALCITE", buy: 2, sell: 0.5 },
+    { material: "DRIPSTONE_BLOCK", buy: 1, sell: 0.25 },
+    { material: "HAY_BLOCK", buy: 47.25, sell: 11.82 },
+    { material: "HONEY_BLOCK", buy: 33.34, sell: 8.34 },
+    { material: "MAGMA_BLOCK", buy: 33.63, sell: 8.41 },
+    { material: "PACKED_ICE", buy: 13.5, sell: 3.38 },
+    { material: "ROOTED_DIRT", buy: 1, sell: 0.25 },
+    { material: "SLIME_BLOCK", buy: 47.25, sell: 11.82 },
+    { material: "SNOW_BLOCK", buy: 12.6, sell: 3.15 },
+    { material: "SOUL_SAND", buy: 10, sell: 2.5 },
+    { material: "TNT", buy: 106.58, sell: 26.65 },
+
+    { material: "ANDESITE", buy: 0.72, sell: 0.18 },
+    { material: "ANDESITE_SLAB", buy: 0.38, sell: 0.1 },
+    { material: "ANDESITE_STAIRS", buy: 0.75, sell: 0.19 },
+
+    { material: "BAMBOO_BLOCK", buy: 0.95, sell: 0.24 },
+    { material: "BAMBOO_SLAB", buy: 0.27, sell: 0.07 },
+    { material: "BAMBOO_STAIRS", buy: 0.79, sell: 0.2 },
+
+    { material: "BLACKSTONE", buy: 0.75, sell: 0.19 },
+    { material: "BLACKSTONE_SLAB", buy: 0.4, sell: 0.1 },
+
+    { material: "BOOKSHELF", buy: 119.12, sell: 29.78 },
+
+    { material: "STONE", buy: 0.72, sell: 0.18 },
+    { material: "STONE_SLAB", buy: 0.38, sell: 0.1 },
+
+    { material: "GLASS", buy: 6.3, sell: 1.58 },
+    { material: "TINTED_GLASS", buy: 6.07, sell: 1.52 },
+
+    { material: "SAND", buy: 6, sell: 1.5 },
+
+    { material: "OBSIDIAN", buy: 31.25, sell: 7.82 },
+
+    { material: "BLACK_WOOL", buy: 29.4, sell: 7.35 },
+    { material: "WHITE_WOOL", buy: 29.4, sell: 7.35 }
+];
+
+// =======================
+// Auto-Kategorie Funktion
+// =======================
+function getCategory(name) {
+    if (name.includes("SLAB") || name.includes("STAIRS")) return "🪜 Slabs & Stairs";
+    if (name.includes("WOOL")) return "🧶 Wolle";
+    if (name.includes("TNT")) return "💣 Redstone";
+    if (name.includes("BLACKSTONE") || name.includes("BASALT") || name.includes("SOUL")) return "🔥 Nether";
+    if (name.includes("BOOK") || name.includes("BRICK")) return "📚 Deko";
+    return "🧱 Blöcke";
+}
+
+// Kategorie hinzufügen
+items.forEach(i => i.category = getCategory(i.material));
+
+// =======================
+const list = document.getElementById("item-list");
+const search = document.getElementById("search");
+const categoryList = document.getElementById("categories");
+let activeCategory = "Alle";
+
+// =======================
+function renderCategories() {
+    const cats = ["Alle", ...new Set(items.map(i => i.category))];
+    categoryList.innerHTML = "";
+
+    cats.forEach(cat => {
+        const li = document.createElement("li");
+        li.textContent = cat;
+        if (cat === activeCategory) li.classList.add("active");
+
+        li.onclick = () => {
+            activeCategory = cat;
+            renderCategories();
+            renderItems(search.value);
+        };
+        categoryList.appendChild(li);
+    });
+}
+
+function renderItems(filter = "") {
+    list.innerHTML = "";
+    items.filter(i =>
+        (activeCategory === "Alle" || i.category === activeCategory) &&
+        i.material.toLowerCase().includes(filter.toLowerCase())
+    ).forEach(item => {
+        list.innerHTML += `
+        <div class="card">
+            <h3>${item.material}</h3>
+            <div class="price">
+                <span>🟢 ${item.buy}$</span>
+                <span>🔴 ${item.sell}$</span>
+            </div>
+        </div>`;
+    });
+}
+
+search.addEventListener("input", e => renderItems(e.target.value));
+
+// START
+renderCategories();
+renderItems();
+</script>
+
 </body>
 </html>
