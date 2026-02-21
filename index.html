@@ -5,16 +5,13 @@
 <title>Marktpreise – CR14</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    font-family: "Segoe UI", sans-serif;
-}
+* { box-sizing: border-box; font-family: "Segoe UI", sans-serif; }
 
 body {
     margin: 0;
     padding: 40px;
     color: #fff;
-    background: linear-gradient(135deg, rgb(10, 25, 50), rgb(20, 40, 70));
+    background: linear-gradient(135deg, rgb(10,25,50), rgb(20,40,70));
     background-size: 400% 400%;
     animation: gradientBG 20s ease infinite;
 }
@@ -34,33 +31,30 @@ body {
 
 .sidebar {
     width: 240px;
-    background: rgba(0, 30, 60, 0.85);
+    background: rgba(0,30,60,0.85);
     border-radius: 16px;
     padding: 20px;
 }
 
 .sidebar h2 {
     text-align: center;
-    color: rgb(0, 230, 230);
+    color: rgb(0,230,230);
 }
 
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-}
+.sidebar ul { list-style: none; padding: 0; }
 
 .sidebar li {
     padding: 12px;
     margin-bottom: 10px;
     border-radius: 10px;
     cursor: pointer;
-    background: rgba(0, 60, 100, 0.8);
-    color: rgb(150, 230, 230);
+    background: rgba(0,60,100,0.8);
+    color: rgb(150,230,230);
 }
 
 .sidebar li.active,
 .sidebar li:hover {
-    background: rgba(0, 200, 200, 0.6);
+    background: rgba(0,200,200,0.6);
     color: #000;
 }
 
@@ -68,7 +62,7 @@ body {
 
 h1 {
     text-align: center;
-    color: rgb(100, 230, 230);
+    color: rgb(100,230,230);
 }
 
 #search {
@@ -78,8 +72,8 @@ h1 {
     border-radius: 12px;
     border: none;
     margin: 30px 0;
-    background: rgba(0, 50, 100, 0.8);
-    color: rgb(150, 230, 230);
+    background: rgba(0,50,100,0.8);
+    color: rgb(150,230,230);
 }
 
 .grid {
@@ -89,14 +83,14 @@ h1 {
 }
 
 .card {
-    background: rgba(0, 40, 80, 0.8);
+    background: rgba(0,40,80,0.8);
     border-radius: 16px;
     padding: 20px;
 }
 
 .card h3 {
     margin: 0 0 10px;
-    color: rgb(0, 230, 230);
+    color: rgb(0,230,230);
 }
 
 .price {
@@ -125,7 +119,7 @@ h1 {
 
 <script>
 // =======================
-// Items (OHNE Kategorien)
+// ALLE ITEMS (INKL. SPAWN EGGS)
 // =======================
 const items = [
     { material: "CALCITE", buy: 2, sell: 0.5 },
@@ -140,46 +134,67 @@ const items = [
     { material: "SOUL_SAND", buy: 10, sell: 2.5 },
     { material: "TNT", buy: 106.58, sell: 26.65 },
 
-    { material: "ANDESITE", buy: 0.72, sell: 0.18 },
-    { material: "ANDESITE_SLAB", buy: 0.38, sell: 0.1 },
-    { material: "ANDESITE_STAIRS", buy: 0.75, sell: 0.19 },
-
-    { material: "BAMBOO_BLOCK", buy: 0.95, sell: 0.24 },
-    { material: "BAMBOO_SLAB", buy: 0.27, sell: 0.07 },
-    { material: "BAMBOO_STAIRS", buy: 0.79, sell: 0.2 },
-
-    { material: "BLACKSTONE", buy: 0.75, sell: 0.19 },
-    { material: "BLACKSTONE_SLAB", buy: 0.4, sell: 0.1 },
-
-    { material: "BOOKSHELF", buy: 119.12, sell: 29.78 },
-
-    { material: "STONE", buy: 0.72, sell: 0.18 },
-    { material: "STONE_SLAB", buy: 0.38, sell: 0.1 },
-
-    { material: "GLASS", buy: 6.3, sell: 1.58 },
-    { material: "TINTED_GLASS", buy: 6.07, sell: 1.52 },
-
-    { material: "SAND", buy: 6, sell: 1.5 },
-
-    { material: "OBSIDIAN", buy: 31.25, sell: 7.82 },
-
-    { material: "BLACK_WOOL", buy: 29.4, sell: 7.35 },
-    { material: "WHITE_WOOL", buy: 29.4, sell: 7.35 }
+    // ===== Spawn Eggs =====
+    { material: "ALLAY_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "ARMADILLO_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "AXOLOTL_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "BAT_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "BLAZE_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "BOGGED_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "BREEZE_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "CAMEL_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "CAT_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "CAVE_SPIDER_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "CHICKEN_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "COD_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "COW_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "CREEPER_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "DOLPHIN_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "DONKEY_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "DROWNED_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "ELDER_GUARDIAN_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "ENDERMAN_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "ENDERMITE_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "EVOKER_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "FOX_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "FROG_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "GHAST_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "GLOW_SQUID_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "GOAT_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "GUARDIAN_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "HOGLIN_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "HORSE_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "HUSK_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "IRON_GOLEM_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "LLAMA_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "MAGMA_CUBE_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "MOOSHROOM_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "MULE_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "OCELOT_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "PANDA_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "PARROT_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "PHANTOM_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "PIG_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "WARDEN_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "WITHER_SKELETON_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "WOLF_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "ZOMBIE_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "ZOMBIE_VILLAGER_SPAWN_EGG", buy: 999999999, sell: -1 },
+    { material: "ZOMBIFIED_PIGLIN_SPAWN_EGG", buy: 999999999, sell: -1 }
 ];
 
 // =======================
-// Auto-Kategorie Funktion
+// Kategorien automatisch
 // =======================
 function getCategory(name) {
+    if (name.includes("SPAWN_EGG")) return "🧬 Spawn Eggs";
     if (name.includes("SLAB") || name.includes("STAIRS")) return "🪜 Slabs & Stairs";
     if (name.includes("WOOL")) return "🧶 Wolle";
     if (name.includes("TNT")) return "💣 Redstone";
-    if (name.includes("BLACKSTONE") || name.includes("BASALT") || name.includes("SOUL")) return "🔥 Nether";
-    if (name.includes("BOOK") || name.includes("BRICK")) return "📚 Deko";
+    if (name.includes("BLACKSTONE") || name.includes("SOUL")) return "🔥 Nether";
     return "🧱 Blöcke";
 }
 
-// Kategorie hinzufügen
 items.forEach(i => i.category = getCategory(i.material));
 
 // =======================
@@ -188,16 +203,13 @@ const search = document.getElementById("search");
 const categoryList = document.getElementById("categories");
 let activeCategory = "Alle";
 
-// =======================
 function renderCategories() {
     const cats = ["Alle", ...new Set(items.map(i => i.category))];
     categoryList.innerHTML = "";
-
     cats.forEach(cat => {
         const li = document.createElement("li");
         li.textContent = cat;
         if (cat === activeCategory) li.classList.add("active");
-
         li.onclick = () => {
             activeCategory = cat;
             renderCategories();
@@ -209,24 +221,25 @@ function renderCategories() {
 
 function renderItems(filter = "") {
     list.innerHTML = "";
-    items.filter(i =>
-        (activeCategory === "Alle" || i.category === activeCategory) &&
-        i.material.toLowerCase().includes(filter.toLowerCase())
-    ).forEach(item => {
-        list.innerHTML += `
-        <div class="card">
-            <h3>${item.material}</h3>
-            <div class="price">
-                <span>🟢 ${item.buy}$</span>
-                <span>🔴 ${item.sell}$</span>
-            </div>
-        </div>`;
-    });
+    items
+        .filter(i =>
+            (activeCategory === "Alle" || i.category === activeCategory) &&
+            i.material.toLowerCase().includes(filter.toLowerCase())
+        )
+        .forEach(item => {
+            list.innerHTML += `
+            <div class="card">
+                <h3>${item.material}</h3>
+                <div class="price">
+                    <span>🟢 ${item.buy}$</span>
+                    <span>🔴 ${item.sell === -1 ? "Nicht verkäuflich" : item.sell + "$"}</span>
+                </div>
+            </div>`;
+        });
 }
 
 search.addEventListener("input", e => renderItems(e.target.value));
 
-// START
 renderCategories();
 renderItems();
 </script>
