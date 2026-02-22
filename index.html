@@ -22,12 +22,7 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-.layout {
-    display: flex;
-    gap: 30px;
-    max-width: 1600px;
-    margin: auto;
-}
+.layout { display: flex; gap: 30px; max-width: 1600px; margin: auto; }
 
 .sidebar {
     width: 260px;
@@ -36,13 +31,8 @@ body {
     padding: 20px;
 }
 
-.sidebar h2 {
-    text-align: center;
-    color: rgb(0,230,230);
-}
-
+.sidebar h2 { text-align: center; color: rgb(0,230,230); }
 .sidebar ul { list-style: none; padding: 0; }
-
 .sidebar li {
     padding: 12px;
     margin-bottom: 10px;
@@ -51,19 +41,13 @@ body {
     background: rgba(0,60,100,0.8);
     color: rgb(150,230,230);
 }
-
-.sidebar li.active,
-.sidebar li:hover {
+.sidebar li.active, .sidebar li:hover {
     background: rgba(0,200,200,0.6);
     color: #000;
 }
 
 .app { flex: 1; }
-
-h1 {
-    text-align: center;
-    color: rgb(100,230,230);
-}
+h1 { text-align: center; color: rgb(100,230,230); }
 
 #search {
     width: 100%;
@@ -88,15 +72,9 @@ h1 {
     padding: 20px;
 }
 
-.card h3 {
-    margin: 0 0 10px;
-    color: rgb(0,230,230);
-}
+.card h3 { margin: 0 0 10px; color: rgb(0,230,230); }
 
-.price {
-    display: flex;
-    justify-content: space-between;
-}
+.price { display: flex; justify-content: space-between; }
 </style>
 </head>
 
@@ -119,9 +97,10 @@ h1 {
 
 <script>
 // =======================
-// ITEMS (YAML → HTML)
+// ITEMS (Blöcke + Spawn-Eggs)
 // =======================
 const items = [
+    // ---- Blöcke (1-99 aus deiner YAML) ----
     { material:"CALCITE", buy:2, sell:0.5 },
     { material:"DRIPSTONE_BLOCK", buy:1, sell:0.25 },
     { material:"HAY_BLOCK", buy:47.25, sell:11.82 },
@@ -133,14 +112,12 @@ const items = [
     { material:"SNOW_BLOCK", buy:12.6, sell:3.15 },
     { material:"SOUL_SAND", buy:10, sell:2.5 },
     { material:"TNT", buy:106.58, sell:26.65 },
-
     { material:"ANDESITE", buy:0.72, sell:0.18 },
     { material:"ANDESITE_SLAB", buy:0.38, sell:0.1 },
     { material:"ANDESITE_STAIRS", buy:0.75, sell:0.19 },
     { material:"POLISHED_ANDESITE", buy:0.75, sell:0.19 },
     { material:"POLISHED_ANDESITE_SLAB", buy:0.38, sell:0.1 },
     { material:"POLISHED_ANDESITE_STAIRS", buy:0.75, sell:0.19 },
-
     { material:"BAMBOO_BLOCK", buy:0.95, sell:0.24 },
     { material:"BAMBOO_MOSAIC", buy:0.55, sell:0.14 },
     { material:"BAMBOO_MOSAIC_SLAB", buy:0.29, sell:0.08 },
@@ -148,7 +125,6 @@ const items = [
     { material:"BAMBOO_PLANKS", buy:0.5, sell:0.13 },
     { material:"BAMBOO_SLAB", buy:0.27, sell:0.07 },
     { material:"BAMBOO_STAIRS", buy:0.79, sell:0.2 },
-
     { material:"BLACKSTONE", buy:0.75, sell:0.19 },
     { material:"BLACKSTONE_SLAB", buy:0.4, sell:0.1 },
     { material:"BLACKSTONE_STAIRS", buy:0.79, sell:0.2 },
@@ -158,13 +134,11 @@ const items = [
     { material:"POLISHED_BLACKSTONE_BRICK_STAIRS", buy:0.79, sell:0.2 },
     { material:"POLISHED_BLACKSTONE_SLAB", buy:0.4, sell:0.1 },
     { material:"POLISHED_BLACKSTONE_STAIRS", buy:0.79, sell:0.2 },
-
     { material:"BOOKSHELF", buy:119.12, sell:29.78 },
     { material:"CHISELED_BOOKSHELF", buy:8.77, sell:2.2 },
     { material:"BRICKS", buy:92.61, sell:23.16 },
     { material:"BRICK_SLAB", buy:48.63, sell:12.16 },
     { material:"BRICK_STAIRS", buy:97.25, sell:24.32 },
-
     { material:"BASALT", buy:1.43, sell:0.92 },
     { material:"COBBLESTONE", buy:0.68, sell:0.17 },
     { material:"COBBLESTONE_SLAB", buy:0.36, sell:0.09 },
@@ -172,7 +146,6 @@ const items = [
     { material:"MOSSY_COBBLESTONE", buy:7.57, sell:1.52 },
     { material:"MOSSY_COBBLESTONE_SLAB", buy:3.74, sell:0.56 },
     { material:"MOSSY_COBBLESTONE_STAIRS", buy:7.97, sell:1.62 },
-
     { material:"BLACK_CONCRETE", buy:8.41, sell:2.11 },
     { material:"BLUE_CONCRETE", buy:8.72, sell:2.18 },
     { material:"BROWN_CONCRETE", buy:8.55, sell:2.14 },
@@ -189,23 +162,101 @@ const items = [
     { material:"RED_CONCRETE", buy:7.87, sell:1.97 },
     { material:"WHITE_CONCRETE", buy:8.01, sell:2.01 },
     { material:"YELLOW_CONCRETE", buy:7.82, sell:1.96 },
-
     { material:"COBBLED_DEEPSLATE", buy:0.68, sell:0.17 },
     { material:"COBBLED_DEEPSLATE_SLAB", buy:0.36, sell:0.09 },
     { material:"COBBLED_DEEPSLATE_STAIRS", buy:0.72, sell:0.18 },
     { material:"DEEPSLATE", buy:0.72, sell:0.18 },
     { material:"DEEPSLATE_TILE_SLAB", buy:0.42, sell:0.11 },
-    { material:"DEEPSLATE_TILE_STAIRS", buy:0.83, sell:0.21 }
+    { material:"DEEPSLATE_TILE_STAIRS", buy:0.83, sell:0.21 },
+
+    // ---- Spawn-Eggs (1-77) ----
+    { material:"ALLAY_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"ARMADILLO_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"AXOLOTL_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"BAT_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"BLAZE_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"BOGGED_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"BREEZE_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"CAMEL_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"CAT_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"CAVE_SPIDER_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"CHICKEN_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"COD_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"COW_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"CREEPER_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"DOLPHIN_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"DONKEY_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"DROWNED_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"ELDER_GUARDIAN_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"ENDERMAN_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"ENDERMITE_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"EVOKER_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"FOX_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"FROG_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"GHAST_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"GLOW_SQUID_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"GOAT_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"GUARDIAN_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"HOGLIN_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"HORSE_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"HUSK_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"IRON_GOLEM_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"LLAMA_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"MAGMA_CUBE_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"MOOSHROOM_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"MULE_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"OCELOT_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"PANDA_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"PARROT_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"PHANTOM_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"PIG_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"PIGLIN_BRUTE_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"PIGLIN_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"PILLAGER_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"POLAR_BEAR_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"PUFFERFISH_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"RABBIT_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"RAVAGER_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"SALMON_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"SHEEP_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"SHULKER_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"SILVERFISH_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"SKELETON_HORSE_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"SKELETON_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"SLIME_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"SNIFFER_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"SNOW_GOLEM_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"SPIDER_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"SQUID_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"STRAY_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"STRIDER_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"TADPOLE_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"TRADER_LLAMA_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"TROPICAL_FISH_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"TURTLE_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"VEX_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"VILLAGER_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"VINDICATOR_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"WANDERING_TRADER_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"WARDEN_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"WITCH_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"WITHER_SKELETON_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"WOLF_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"ZOGLIN_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"ZOMBIE_HORSE_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"ZOMBIE_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"ZOMBIE_VILLAGER_SPAWN_EGG", buy:999999999, sell:-1 },
+    { material:"ZOMBIFIED_PIGLIN_SPAWN_EGG", buy:999999999, sell:-1 }
 ];
 
 // =======================
-// Kategorien
+// Kategorien automatisch
 // =======================
 function getCategory(name) {
-    if (name.includes("CONCRETE")) return "🧱 Beton";
-    if (name.includes("COPPER")) return "🟠 Kupfer";
-    if (name.includes("DEEPSLATE")) return "⬛ Tiefenschiefer";
+    if (name.includes("SPAWN_EGG")) return "🟢 Spawn-Eggs";
     if (name.includes("SLAB") || name.includes("STAIRS")) return "🪜 Slabs & Stairs";
+    if (name.includes("WOOL") || name.includes("CONCRETE")) return "🎨 Wolle & Beton";
+    if (name.includes("TNT")) return "💣 Redstone";
     if (name.includes("BLACKSTONE") || name.includes("BASALT") || name.includes("SOUL")) return "🔥 Nether";
     if (name.includes("BOOK") || name.includes("BRICK")) return "📚 Deko";
     return "🧱 Blöcke";
@@ -219,6 +270,7 @@ const search = document.getElementById("search");
 const categoryList = document.getElementById("categories");
 let activeCategory = "Alle";
 
+// Kategorien rendern
 function renderCategories() {
     const cats = ["Alle", ...new Set(items.map(i => i.category))];
     categoryList.innerHTML = "";
@@ -235,27 +287,28 @@ function renderCategories() {
     });
 }
 
+// Items rendern
 function renderItems(filter = "") {
     list.innerHTML = "";
-    items
-        .filter(i =>
-            (activeCategory === "Alle" || i.category === activeCategory) &&
-            i.material.toLowerCase().includes(filter.toLowerCase())
-        )
-        .forEach(item => {
-            list.innerHTML += `
-            <div class="card">
-                <h3>${item.material}</h3>
-                <div class="price">
-                    <span>🟢 ${item.buy}$</span>
-                    <span>🔴 ${item.sell}$</span>
-                </div>
-            </div>`;
-        });
+    items.filter(i =>
+        (activeCategory === "Alle" || i.category === activeCategory) &&
+        i.material.toLowerCase().includes(filter.toLowerCase())
+    ).forEach(item => {
+        list.innerHTML += `
+        <div class="card">
+            <h3>${item.material}</h3>
+            <div class="price">
+                <span>🟢 ${item.buy}$</span>
+                <span>🔴 ${item.sell}$</span>
+            </div>
+        </div>`;
+    });
 }
 
+// Suche
 search.addEventListener("input", e => renderItems(e.target.value));
 
+// Start
 renderCategories();
 renderItems();
 </script>
