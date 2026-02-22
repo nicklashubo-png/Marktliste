@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Marktpreise – CR14</title>
-
 <style>
 * { box-sizing: border-box; font-family: "Segoe UI", sans-serif; }
 
@@ -75,9 +74,10 @@ h1 { text-align: center; color: rgb(100,230,230); }
 .card h3 { margin: 0 0 10px; color: rgb(0,230,230); }
 
 .price { display: flex; justify-content: space-between; }
+
+.spawn { color: #7CFC00; font-weight: bold; }
 </style>
 </head>
-
 <body>
 
 <div class="layout">
@@ -97,10 +97,10 @@ h1 { text-align: center; color: rgb(100,230,230); }
 
 <script>
 // =======================
-// ITEMS (Blöcke + Spawn-Eggs)
+// ITEMS: Blöcke + Spawn-Eggs + Spawner
 // =======================
 const items = [
-    // ---- Blöcke (1-99 aus deiner YAML) ----
+    // ---- Blöcke ----
     { material:"CALCITE", buy:2, sell:0.5 },
     { material:"DRIPSTONE_BLOCK", buy:1, sell:0.25 },
     { material:"HAY_BLOCK", buy:47.25, sell:11.82 },
@@ -169,7 +169,7 @@ const items = [
     { material:"DEEPSLATE_TILE_SLAB", buy:0.42, sell:0.11 },
     { material:"DEEPSLATE_TILE_STAIRS", buy:0.83, sell:0.21 },
 
-    // ---- Spawn-Eggs (1-77) ----
+    // ---- Spawn-Eggs (alle) ----
     { material:"ALLAY_SPAWN_EGG", buy:999999999, sell:-1 },
     { material:"ARMADILLO_SPAWN_EGG", buy:999999999, sell:-1 },
     { material:"AXOLOTL_SPAWN_EGG", buy:999999999, sell:-1 },
@@ -246,31 +246,72 @@ const items = [
     { material:"ZOMBIE_HORSE_SPAWN_EGG", buy:999999999, sell:-1 },
     { material:"ZOMBIE_SPAWN_EGG", buy:999999999, sell:-1 },
     { material:"ZOMBIE_VILLAGER_SPAWN_EGG", buy:999999999, sell:-1 },
-    { material:"ZOMBIFIED_PIGLIN_SPAWN_EGG", buy:999999999, sell:-1 }
+    { material:"ZOMBIFIED_PIGLIN_SPAWN_EGG", buy:999999999, sell:-1 },
+
+    // ---- Spawner ----
+    { material:"SPAWNER", spawnertype:"ALLAY", buy:225000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"ALLAY", buy:225000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"AXOLOTL", buy:150000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"BAT", buy:10000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"BLAZE", buy:125000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"BOGGED", buy:100000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"BREEZE", buy:100000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"CAMEL", buy:50000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"CAT", buy:25000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"CAVE_SPIDER", buy:50000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"CHICKEN", buy:15000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"COD", buy:10000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"COW", buy:100000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"CREEPER", buy:150000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"ENDERMAN", buy:175000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"FROG", buy:395000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"GLOW_SQUID", buy:100000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"GOAT", buy:120000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"HORSE", buy:65000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"HUSK", buy:125000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"IRON_GOLEM", buy:1000000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"MAGMA_CUBE", buy:500000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"MUSHROOM_COW", buy:125000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"PANDA", buy:50000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"PARROT", buy:30000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"PHANTOM", buy:250000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"PIGLIN_BRUTE", buy:2000000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"RABBIT", buy:45000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"SHEEP", buy:45000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"SHULKER", buy:500000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"SKELETON", buy:125000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"SLIME", buy:550000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"SNIFFER", buy:45000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"SPIDER", buy:45000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"SQUID", buy:100000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"STRIDER", buy:45000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"WITCH", buy:500000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"WOLF", buy:250000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"ZOMBIE", buy:120000, sell:-1 },
+    { material:"SPAWNER", spawnertype:"ZOMBIFIED_PIGLIN", buy:120000, sell:-1 }
 ];
 
 // =======================
 // Kategorien automatisch
 // =======================
-function getCategory(name) {
-    if (name.includes("SPAWN_EGG")) return "🟢 Spawn-Eggs";
-    if (name.includes("SLAB") || name.includes("STAIRS")) return "🪜 Slabs & Stairs";
-    if (name.includes("WOOL") || name.includes("CONCRETE")) return "🎨 Wolle & Beton";
-    if (name.includes("TNT")) return "💣 Redstone";
-    if (name.includes("BLACKSTONE") || name.includes("BASALT") || name.includes("SOUL")) return "🔥 Nether";
-    if (name.includes("BOOK") || name.includes("BRICK")) return "📚 Deko";
+function getCategory(item) {
+    if (item.material === "SPAWNER") return "🟣 Spawner";
+    if (item.material.includes("SPAWN_EGG")) return "🟢 Spawn-Eggs";
+    if (item.material.includes("SLAB") || item.material.includes("STAIRS")) return "🪜 Slabs & Stairs";
+    if (item.material.includes("CONCRETE") || item.material.includes("WOOL")) return "🎨 Wolle & Beton";
+    if (item.material.includes("TNT")) return "💣 Redstone";
+    if (item.material.includes("BLACKSTONE") || item.material.includes("BASALT") || item.material.includes("SOUL")) return "🔥 Nether";
+    if (item.material.includes("BOOK") || item.material.includes("BRICK")) return "📚 Deko";
     return "🧱 Blöcke";
 }
 
-items.forEach(i => i.category = getCategory(i.material));
+items.forEach(i => i.category = getCategory(i));
 
-// =======================
 const list = document.getElementById("item-list");
 const search = document.getElementById("search");
 const categoryList = document.getElementById("categories");
 let activeCategory = "Alle";
 
-// Kategorien rendern
 function renderCategories() {
     const cats = ["Alle", ...new Set(items.map(i => i.category))];
     categoryList.innerHTML = "";
@@ -287,7 +328,6 @@ function renderCategories() {
     });
 }
 
-// Items rendern
 function renderItems(filter = "") {
     list.innerHTML = "";
     items.filter(i =>
@@ -296,19 +336,17 @@ function renderItems(filter = "") {
     ).forEach(item => {
         list.innerHTML += `
         <div class="card">
-            <h3>${item.material}</h3>
+            <h3>${item.material}${item.spawnertype ? " (" + item.spawnertype + ")" : ""}</h3>
             <div class="price">
-                <span>🟢 ${item.buy}$</span>
-                <span>🔴 ${item.sell}$</span>
+                <span>🟢 ${item.buy.toLocaleString()}$</span>
+                <span style="color:${item.sell===-1?'orange':'red'}">🔴 ${item.sell===-1?'N/A':item.sell.toLocaleString()}$</span>
             </div>
         </div>`;
     });
 }
 
-// Suche
 search.addEventListener("input", e => renderItems(e.target.value));
 
-// Start
 renderCategories();
 renderItems();
 </script>
