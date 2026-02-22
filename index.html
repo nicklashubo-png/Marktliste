@@ -25,12 +25,12 @@ body {
 .layout {
     display: flex;
     gap: 30px;
-    max-width: 1500px;
+    max-width: 1600px;
     margin: auto;
 }
 
 .sidebar {
-    width: 240px;
+    width: 260px;
     background: rgba(0,30,60,0.85);
     border-radius: 16px;
     padding: 20px;
@@ -119,7 +119,7 @@ h1 {
 
 <script>
 // =======================
-// ALLE ITEMS (INKL. SPAWN EGGS)
+// ITEMS (YAML → HTML)
 // =======================
 const items = [
     { material:"CALCITE", buy:2, sell:0.5 },
@@ -196,64 +196,18 @@ const items = [
     { material:"DEEPSLATE", buy:0.72, sell:0.18 },
     { material:"DEEPSLATE_TILE_SLAB", buy:0.42, sell:0.11 },
     { material:"DEEPSLATE_TILE_STAIRS", buy:0.83, sell:0.21 }
-    // ===== Spawn Eggs =====
-    { material: "ALLAY_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "ARMADILLO_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "AXOLOTL_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "BAT_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "BLAZE_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "BOGGED_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "BREEZE_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "CAMEL_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "CAT_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "CAVE_SPIDER_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "CHICKEN_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "COD_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "COW_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "CREEPER_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "DOLPHIN_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "DONKEY_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "DROWNED_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "ELDER_GUARDIAN_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "ENDERMAN_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "ENDERMITE_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "EVOKER_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "FOX_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "FROG_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "GHAST_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "GLOW_SQUID_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "GOAT_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "GUARDIAN_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "HOGLIN_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "HORSE_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "HUSK_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "IRON_GOLEM_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "LLAMA_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "MAGMA_CUBE_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "MOOSHROOM_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "MULE_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "OCELOT_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "PANDA_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "PARROT_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "PHANTOM_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "PIG_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "WARDEN_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "WITHER_SKELETON_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "WOLF_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "ZOMBIE_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "ZOMBIE_VILLAGER_SPAWN_EGG", buy: 999999999, sell: -1 },
-    { material: "ZOMBIFIED_PIGLIN_SPAWN_EGG", buy: 999999999, sell: -1 }
 ];
 
 // =======================
-// Kategorien automatisch
+// Kategorien
 // =======================
 function getCategory(name) {
-    if (name.includes("SPAWN_EGG")) return "🧬 Spawn Eggs";
+    if (name.includes("CONCRETE")) return "🧱 Beton";
+    if (name.includes("COPPER")) return "🟠 Kupfer";
+    if (name.includes("DEEPSLATE")) return "⬛ Tiefenschiefer";
     if (name.includes("SLAB") || name.includes("STAIRS")) return "🪜 Slabs & Stairs";
-    if (name.includes("WOOL")) return "🧶 Wolle";
-    if (name.includes("TNT")) return "💣 Redstone";
-    if (name.includes("BLACKSTONE") || name.includes("SOUL")) return "🔥 Nether";
+    if (name.includes("BLACKSTONE") || name.includes("BASALT") || name.includes("SOUL")) return "🔥 Nether";
+    if (name.includes("BOOK") || name.includes("BRICK")) return "📚 Deko";
     return "🧱 Blöcke";
 }
 
@@ -294,7 +248,7 @@ function renderItems(filter = "") {
                 <h3>${item.material}</h3>
                 <div class="price">
                     <span>🟢 ${item.buy}$</span>
-                    <span>🔴 ${item.sell === -1 ? "Nicht verkäuflich" : item.sell + "$"}</span>
+                    <span>🔴 ${item.sell}$</span>
                 </div>
             </div>`;
         });
